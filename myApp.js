@@ -19,15 +19,25 @@ app.get('/json', function(req, res) {
 });
 
 app.get('/now', function(req, res, next) {
-  
-req.time = new Date().toString()
-  
+  req.time = new Date().toString()
   next();
 }, function(req, res) {
   res.send({"time": req.time});
 });
 
+app.get("/:word/echo", (req, res) => {
+  const { word } = req.params;
+  res.json({
+    echo: word
+  });
+});
 
+app.get("/name", (req, res) => {
+  let {first, last} = req.query
+  res.json({
+    name: `${first} ${last}`
+  })
+});
 
 
 
